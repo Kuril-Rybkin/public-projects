@@ -1,8 +1,8 @@
 # public-projects
 This repository contains some homeworks from the following courses:
-- BIE-PA1[^1]
-- BIE-PA2[^2]
-- BIE-AG1[^3]
+- [BIE-PA1](https://github.com/Kuril-Rybkin/public-projects/tree/PA1)[^1]
+- [BIE-PA2](https://github.com/Kuril-Rybkin/public-projects/tree/PA2)[^2]
+- [BIE-AG1](https://github.com/Kuril-Rybkin/public-projects/tree/AG1)[^3]
 - BIE-TJV[^4]
 - BIE-OSY[^5]
 - BIE-PSI[^6]
