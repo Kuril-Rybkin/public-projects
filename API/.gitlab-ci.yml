@@ -1,0 +1,39 @@
+stages:          # List of stages for jobs, and their order of execution
+  - build
+  - test
+  - package
+
+compile:
+  stage: build
+  image: maven:3.8.6-openjdk-18
+  script:
+    - ./gradlew bootJar
+  artifacts:
+    paths:
+      - ./app/libs/*.jar
+  only:
+    - master
+
+tests:
+  stage: test
+  image: maven:3.8.6-openjdk-18
+  script:
+    - ./gradlew test
+  only:
+    - master
+
+container:
+  stage: package
+  image: $CI_REGISTRY/ict/images/alpine/ci:latest
+  variables:
+    BUILDAH_ISOLATION: chroot
+    IMAGE_TAG: $CI_REGISTRY_IMAGE:$CI_COMMIT_REF_SLUG
+  before_script:
+    - apk add buildah
+    - buildah login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
+    - buildah info
+  script:
+    - buildah build --tag $IMAGE_TAG -f Dockerfile
+    - buildah push $IMAGE_TAG
+  only:
+    - master

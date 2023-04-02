@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" style="height: 100%">
+<head th:insert="general.html::head"></head>
+
+<body style="padding-top: 58px">
+<div th:insert="general.html::navbar"></div>
+
+<div class="alert alert-success" th:if="${success}">
+    <h4 class="alert-heading">User created</h4>
+    <p>Continue to <a href="/listings" class="alert-link">browse all listings</a> or <a href="/listings/create" class="alert-link">create a post here</a></p>
+</div>
+<div class="alert alert-danger" th:if="${success == false}">
+    <span th:text="${errorMessage}"></span>
+</div>
+
+<div class="container text-center">
+    <h1 style="margin: 50px; color: #f2f2f2">MyOnlineMarketplace</h1>
+</div>
+<div class="container rounded" style="background: #f2f2f2">
+    <h1 style="margin-bottom: 10px">Create an account</h1>
+    <form th:action="@{/users/create}" th:object="${userDto}" method="post">
+        <div class="form-group">
+            <label for="usernameInput">Username</label>
+            <input type="text" class="form-control" id="usernameInput" aria-describedby="usernameDisclaimer" th:field="*{username}">
+            <small id="usernameDisclaimer" class="form-text text-muted">Your username needs to be unique</small>
+        </div>
+        <div class="form-group">
+            <label for="emailInput">Email address</label>
+            <input type="email" class="form-control" id="emailInput" aria-describedby="emailDisclaimer" th:field="*{email}">
+            <small id="emailDisclaimer" class="form-text text-muted">Buyers will be able to see and contact you by this email.</small>
+        </div>
+        <div class="form-group">
+            <label for="nameInput">Your name</label>
+            <input type="text" class="form-control" id="nameInput" aria-describedby="nameDisclaimer" th:field="*{fullName}">
+            <small id="nameDisclaimer" class="form-text text-muted">Your name will be displayed on all your listings.</small>
+        </div>
+        <div class="form-group form-check">
+            <input type="checkbox" class="form-check-input" id="exampleCheck1">
+            <label class="form-check-label" for="exampleCheck1">I agree to the terms and conditions</label>
+        </div>
+        <button type="submit" class="btn btn-primary" style="margin: 25px">Submit</button>
+    </form>
+</div>
+</body>
+</html>

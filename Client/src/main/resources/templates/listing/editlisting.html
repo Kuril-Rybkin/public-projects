@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" style="height: 100%">
+<head th:insert="general.html::head"></head>
+
+<body style="padding-top: 58px">
+<div th:insert="general.html::navbar"></div>
+
+<div class="alert alert-success" th:if="${success}">
+  <h4 class="alert-heading" th:text="${errorMessage}"></h4>
+</div>
+<div class="alert alert-danger" th:if="${success == false}">
+  <span th:text="${errorMessage}"></span>
+</div>
+<div class="container text-center">
+  <h1 style="margin: 50px; color: #f2f2f2">MyOnlineMarketplace</h1>
+</div>
+<div class="container" style="background: #c8d8e4">
+  <form th:action="@{'/listings/' + ${listing.id} + '/edit'}" method="post">
+    <div class="form-group">
+      <div class="form-group">
+        <label for="titleInput">Title (required)</label>
+        <input type="text" class="form-control" id="titleInput" th:field="*{listing.title}">
+      </div>
+      <div class="form-group">
+        <label for="descInput">Description</label>
+        <input type="text" class="form-control" id="descInput" th:field="*{listing.description}">
+      </div>
+      <div class="form-group">
+        <label for="priceInput">Price</label>
+        <input type="text" class="form-control" id="priceInput" th:field="*{listing.price}">
+      </div>
+      <div class="form-check">
+        <input class="form-check-input" type="radio" name="flexRadioDefault" id="radio1" value="No category" th:field="*{listing.category}" checked="checked">
+        <label class="form-check-label" for="radio1">
+          No category
+        </label>
+      </div>
+      <div class="form-check">
+        <input class="form-check-input" type="radio" name="flexRadioDefault" id="radio2" value="Electronics" th:field="*{listing.category}">
+        <label class="form-check-label" for="radio2">
+          Electronics
+        </label>
+      </div>
+      <div class="form-check">
+        <input class="form-check-input" type="radio" name="flexRadioDefault" id="radio3" value="Real Estate" th:field="*{listing.category}">
+        <label class="form-check-label" for="radio3">
+          Real Estate
+        </label>
+      </div>
+      <div class="form-check">
+        <input class="form-check-input" type="radio" name="flexRadioDefault" id="radio4" value="Furniture" th:field="*{listing.category}">
+        <label class="form-check-label" for="radio4">
+          Furniture
+        </label>
+      </div>
+      <div class="form-check">
+        <input class="form-check-input" type="radio" name="flexRadioDefault" id="radio5" value="Household appliances" th:field="*{listing.category}">
+        <label class="form-check-label" for="radio5">
+          Household appliances
+        </label>
+      </div>
+      <button type="submit" class="btn btn-success" style="margin: 25px">Save changes</button>
+    </div>
+  </form>
+  <a class="btn btn-primary" style="margin: 25px" th:href="${'/listings/' + listing.id + '/editgallery'}">Edit gallery</a>
+  <form th:action="@{'/listings/' + ${listing.id} + '/delete'}" method="post">
+    <button type="submit" class="btn btn-danger" style="margin: 25px">Delete listing</button>
+  </form>
+</div>
+</body>
+</html>

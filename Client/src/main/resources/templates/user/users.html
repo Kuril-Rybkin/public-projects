@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" style="height: 100%">
+<head th:insert="general.html::head"></head>
+
+<body style="padding-top: 58px">
+<div th:insert="general.html::navbar"></div>
+<div class="alert alert-danger" th:if="${success == false}">
+    <span th:text="${errorMessage}"></span>
+</div>
+<div class="container text-center">
+    <h1 style="margin: 50px; color: #f2f2f2">MyOnlineMarketplace</h1>
+</div>
+<div class="container rounded" style="background: #f2f2f2">
+    <h1 style="margin-bottom: 10px">User list</h1>
+    <div th:each="user: ${users}">
+        <p1 th:text="${user.username}"></p1>
+        <a th:href="'/users/' + ${user.username}" class="btn btn-primary" style="margin: 25px" th:text="'View ' + ${user.username} + '\'s profile'"></a>
+    </div>
+</div>
+</body>
+</html>
